@@ -8,6 +8,7 @@ node_modules/
 logs/
 *.log
 
+temp_auto_push.bat
 # Data files
 data/
 
@@ -17,6 +18,6 @@ Thumbs.db
 
 # IDE files
 .idea/
-.vscode/
 *.swp
-*.swo 
+*.swo .gitignore
+temp_interactive_push.bat

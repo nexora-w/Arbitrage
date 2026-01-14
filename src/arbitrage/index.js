@@ -577,12 +577,16 @@ async function executeArbitrage(buyExchange, sellExchange, symbol, amount, oppor
       throw new ArbitrageError(`Failed to execute sell order on ${sellExchange.id} after successful buy`, 'SELL_ORDER_FAILED_AFTER_BUY');
     }
 
+    // Calculate actual profit based on executed trade
+    const actualProfit = (opportunity.sellPrice - opportunity.buyPrice) * baseAmount;
+
     // Create trade record
     const trade = {
       ...opportunity,
       buyOrderId: buyOrder.id || 'simulated',
       sellOrderId: sellOrder.id || 'simulated',
-      baseAmount,
+      amount: baseAmount,  // Required field for Trade schema
+      actualProfit,        // Required field for Trade schema
       quoteAmount: amount,
       completed: true,
       completedAt: new Date().toISOString(),
